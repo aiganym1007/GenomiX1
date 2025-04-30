@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация на летний научный лагерь - GenomiX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Основные стили */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+    }
+    
+    a {
+      text-decoration: none;
+      color: #009D4E;
+      transition: all 0.3s ease;
+    }
+    
+    a:hover {
+      color: #8DC63F;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .section {
+      padding: 60px 0;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+    
+    .genomix-logo {
+      width: 250px;
+      margin-bottom: 30px;
+      background-color: black;
+      border-radius: 10px;
+      padding: 15px;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(to right, #558b2f, #f57c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    
+    .page-title {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: #009D4E;
+    }
+    
+    .service-info {
+      background-color: rgb(139, 195, 74) 0%, #ff9800 100%;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+    
+    .service-image {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    
+    /* Форма */
+    .form-container {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-title {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 16px;
+    }
+    
+    .form-select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 16px;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1em;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #009D4E 0%, #8DC63F 35%, #FFC627 70%, #FF8200 100%);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 157, 78, 0.3);
+      color: white;
+    }
+    
+    .btn:before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.13) 77%,
+        rgba(255, 255, 255, 0.5) 92%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(-45deg);
+      z-index: 1;
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+    
+    .btn:hover:before {
+      opacity: 1;
+      left: 100%;
+    }
+    
+    .btn-text {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+  <style>
+    .logo {
+      width: 400px; /* Увеличиваем ширину (было примерно 250px) */
+      height: auto; /* Сохраняем пропорции */
+      display: block; /* Блочное отображение для центрирования */
+      margin: 0 auto; /* Центрирование по горизонтали */
+      transition: transform 0.3s ease; /* Плавное изменение при наведении */
+    }
+    
+    /* Если нужен эффект при наведении */
+    .logo:hover {
+      transform: scale(1.05); /* Небольшое увеличение при наведении */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="index.html">
+        <!-- Новый логотип GenomiX на черном фоне -->
+       <img src="img.png" alt="GenomiX Logo" class="logo" width="500" height="200">
+        <!-- Если по какой-то причине картинка выше не загрузится, можно использовать второй вариант -->
+        <!-- <img src="https://i.ibb.co/zrdHcGZ/genomix-logo.png" alt="GenomiX Logo" class="logo"> -->
+      </a>
+      <h1 class="page-title">Регистрация на летний научный лагерь</h1>
+    </div>
+    
+    <div class="service-info">
+     <!-- <div class="service-image" src="img.png"></div>-->
+      <h2>О летнем научном лагере</h2>
+      <p>Наш летний научный лагерь GenomiX — это уникальная образовательная программа для детей, увлеченных наукой и желающих погрузиться в удивительный мир биологии и биотехнологий.</p>
+      <p><strong>Дата проведения:</strong> 7-13 июня</p>
+      <p><strong>Возрастные группы:</strong></p>
+      <ul>
+        <li>7-8 лет</li>
+        <li>9-12 лет</li>
+        <li>13-15 лет</li>
+      </ul>
+      <p>В программе лагеря:</p>
+      <ul>
+        <li>Практические эксперименты в лаборатории</li>
+        <li>Интерактивные мастер-классы</li>
+        <li>Научные игры и квесты</li>
+        <li>Встречи с учеными и специалистами</li>
+      </ul>
+    </div>
+    
+    <div class="form-container">
+      <h2 class="form-title">Заполните форму для регистрации</h2>
+      <form action="#" method="post">
+        <input type="hidden" name="service_type" value="Летний научный лагерь">
+        
+        <div class="form-group">
+          <label for="city" class="form-label">Ваш город</label>
+          <select name="city" id="city" class="form-select" required>
+            <option value="">Выберите город</option>
+            <option value="Астана">Астана - 3-14 июля (на базе Astana Garden School)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="age" class="form-label">Возраст ученика</label>
+          <select name="age" id="age" class="form-select" required>
+            <option value="">Выберите возраст</option>
+            <option value="7-8 лет">7-8 лет</option>
+            <option value="9-12 лет">9-12 лет</option>
+            <option value="13-15 лет">13-15 лет</option>
+            <option value="Другой">Другой</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="name" class="form-label">ФИО ученика</label>
+          <input type="text" name="name" id="name" class="form-control" placeholder="ФИО ученика" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="school" class="form-label">Школа, в которой обучается ученик</label>
+          <input type="text" name="school" id="school" class="form-control" placeholder="Школа, в которой обучается ученик" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="parent" class="form-label">ФИО родителя</label>
+          <input type="text" name="parent" id="parent" class="form-control" placeholder="ФИО родителя" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="kaspi_name" class="form-label">ФИО плательщика Kaspi</label>
+          <input type="text" name="kaspi_name" id="kaspi_name" class="form-control" placeholder="ФИО плательщика Kaspi" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone" class="form-label">Номер телефона</label>
+          <input type="tel" name="phone" id="phone" class="form-control" placeholder="Номер телефона" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+        </div>
+        
+        <div class="form-group">
+          <button type="submit" class="btn">
+            <span class="btn-text">Отправить заявку</span>
+          </button>
+        </div>
+      </form>
+      
+      <a href="index.html" class="back-link">Вернуться на главную</a>
+    </div>
+  </div>
+</body>
+</html>
