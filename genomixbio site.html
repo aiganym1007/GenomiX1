@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GenomiX - БиоАкадемия</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Основные стили */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+    }
+    
+    ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+    
+    a {
+      text-decoration: none;
+      color: #009D4E;
+      transition: all 0.3s ease;
+    }
+    
+    a:hover {
+      color: #8DC63F;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .section {
+      padding: 60px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.4rem;
+      margin-bottom: 40px;
+      color: #009D4E;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(to right, #558b2f, #f57c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    
+    /* Шапка */
+    .header {
+      background-color: #fff;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      width: 200px;
+    }
+    
+    .logo img {
+      width: 100%;
+    }
+    
+    .nav {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-item {
+      font-weight: 600;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #009D4E 0%, #8DC63F 35%, #FFC627 70%, #FF8200 100%);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 157, 78, 0.3);
+      color: white;
+    }
+    
+    .btn:before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.13) 77%,
+        rgba(255, 255, 255, 0.5) 92%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(-45deg);
+      z-index: 1;
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+    
+    .btn:hover:before {
+      opacity: 1;
+      left: 100%;
+    }
+    
+    .btn-text {
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Баннер */
+    .hero-banner {
+      position: relative;
+      background: linear-gradient(135deg, #ffffff 0%, #f5f9f0 100%);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      margin: 40px auto;
+      max-width: 1000px;
+    }
+    
+    .corner-decoration {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, rgba(139, 195, 74, 0.2) 0%, rgba(255, 152, 0, 0.2) 100%);
+      clip-path: polygon(100% 0, 0 0, 100% 100%);
+      z-index: 1;
+    }
+    
+    .corner-decoration::after {
+      content: "🧬";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      transform: rotate(45deg);
+      z-index: 2;
+    }
+    
+    .bottom-decoration {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, #8bc34a 0%, #ff9800 50%, #cddc39 100%);
+    }
+    
+    .banner-content {
+      padding: 50px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .banner-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .banner-dates {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f57c00;
+      margin-bottom: 20px;
+      background-color: rgba(255,255,255,0.2);
+      padding: 5px 15px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    
+    .banner-text {
+      max-width: 80%;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+    
+    /* О нас */
+    .about-content {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    .about-image {
+      flex: 1;
+    }
+    
+    .about-text {
+      flex: 1;
+    }
+    
+    /* Преимущества */
+    .features {
+      background-color: #f9f9f9;
+    }
+    
+    .features-content {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    
+    .features-text {
+      flex: 1;
+    }
+    
+    .features-image {
+      flex: 1;
+    }
+    
+    .feature-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .feature-card {
+      flex: 1 1 300px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-header {
+      background: linear-gradient(90deg, #009D4E 0%, #8DC63F 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .feature-header h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    
+    .feature-body {
+      padding: 20px;
+    }
+    
+    /* Услуги */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-header {
+      background: linear-gradient(90deg, #009D4E 0%, #8DC63F 35%, #FFC627 70%, #FF8200 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .service-header h3 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    
+    .service-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .service-body {
+      padding: 20px;
+    }
+    
+    .service-footer {
+      padding: 15px 20px;
+      text-align: center;
+      border-top: 1px solid #eee;
+    }
+    
+    /* Отзывы */
+    .testimonials {
+      background-color: #f9f9f9;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .testimonial-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    
+    .testimonial-author {
+      font-weight: 600;
+      color: #009D4E;
+    }
+    
+    /* Регистрация */
+    .registration {
+      background-color: #fff;
+    }
+    
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 16px;
+    }
+    
+    .form-select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 16px;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1em;
+    }
+    
+    /* Футер */
+    .footer {
+      background-color: #333;
+      color: #fff;
+      padding: 50px 0 20px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-logo {
+      margin-bottom: 20px;
+      max-width: 180px;
+    }
+    
+    .contact-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .contact-item {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: #ffffff20;
+      border-radius: 50%;
+      color: white;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background-color: #009D4E;
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #ffffff20;
+      font-size: 14px;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 992px) {
+      .about-content, .features-content {
+        flex-direction: column;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .banner-title {
+        font-size: 2rem;
+      }
+      
+      .banner-text {
+        max-width: 100%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .banner-content {
+        padding: 30px;
+      }
+      
+      .feature-cards {
+        flex-direction: column;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .section {
+        padding: 40px 0;
+      }
+      
+      .banner-title {
+        font-size: 1.8rem;
+      }
+      
+      .banner-dates {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Шапка -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <img src="https://genomix.kz/wp-content/uploads/2023/06/cropped-genomix-all-logos-53.png" alt="GenomiX Logo">
+      </a>
+      <nav class="nav">
+        <a href="#about" class="nav-item">О нас</a>
+        <a href="#features" class="nav-item">Преимущества</a>
+        <a href="#services" class="nav-item">Услуги</a>
+        <a href="#contacts" class="nav-item">Контакты</a>
+      </nav>
+      <a href="#registration" class="btn">
+        <span class="btn-text">Подать заявку</span>
+      </a>
+    </div>
+  </header>
+  
+  <!-- Баннер -->
+  <section class="container">
+    <div class="hero-banner">
+      <div class="corner-decoration"></div>
+      <div class="bottom-decoration"></div>
+      <div class="banner-content">
+        <h1 class="banner-title gradient-text">Летний научный лагерь GenomiX</h1>
+        <div class="banner-dates">7-13 июня</div>
+        <p class="banner-text">Пробудите у Ваших детей страсть к науке! Уникальная программа для детей 7-15 лет с практическими экспериментами и увлекательными занятиями в области биологии и биотехнологий.</p>
+        <a href="#registration" class="btn">
+          <span class="btn-text">Подать заявку</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- О нас -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">Что такое GenomiX?</h2>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="https://genomix.kz/wp-content/uploads/2023/06/About2.png" alt="Преподаватель GenomiX демонстрирует эксперимент">
+        </div>
+        <div class="about-text">
+          <p>GenomiX - это инновационная биоакадемия, которая предлагает уникальные образовательные программы в области биологии и биотехнологий для детей и подростков.</p>
+          <p>Наша миссия - пробудить интерес к науке у молодого поколения и развить научное мышление через практический опыт и увлекательные эксперименты.</p>
+          <p>Мы создаем среду, где дети могут безопасно экспериментировать, задавать вопросы и получать знания непосредственно через практический опыт под руководством профессиональных ученых и педагогов.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Преимущества -->
+  <section class="section features" id="features">
+    <div class="container">
+      <h2 class="section-title">Почему выбирают GenomiX?</h2>
+      <div class="features-content">
+        <div class="features-text">
+          <p>Мы предлагаем уникальный подход к обучению и целый ряд преимуществ, которые делают наши программы особенными:</p>
+        </div>
+        <div class="features-image">
+          <img src="https://genomix.kz/wp-content/uploads/2023/06/Why.png" alt="Ученики GenomiX">
+        </div>
+      </div>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-header">
+            <h3>Безопасность</h3>
+          </div>
+          <div class="feature-body">
+            <p>Все эксперименты проводятся с соблюдением строгих мер безопасности под постоянным наблюдением опытных преподавателей. Мы используем только безопасные материалы и реагенты, подходящие для детей.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-header">
+            <h3>Квалифицированные преподаватели</h3>
+          </div>
+          <div class="feature-body">
+            <p>Наш преподавательский состав GenomiX - это высококвалифицированные специалисты биологических наук и здравоохранения, окончившие зарубежные ВУЗы и Назарбаев Университет.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-header">
+            <h3>Приглашенные эксперты</h3>
+          </div>
+          <div class="feature-body">
+            <p>К нам приходят гости из разных уголков Казахстана - выдающиеся ученые и талантливые специалисты в области биотехнологий. Они рассказывают о своем пути и вдохновляют учеников.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Услуги -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2 class="section-title">Наши услуги</h2>
+      <p style="text-align: center; margin-bottom: 40px;">Мы предлагаем разнообразные образовательные программы для детей разных возрастов</p>
+      <div class="services-grid">
+        <!-- Летний научный лагерь -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Летний научный лагерь</h3>
+          </div>
+          <div class="service-image" style="background-image: url('https://genomix.kz/wp-content/uploads/2023/06/About2.png');"></div>
+          <div class="service-body">
+            <p>Погрузите вашего ребенка в мир науки с нашим летним лагерем, где обучение становится увлекательным приключением:</p>
+            <ul>
+              <li>Практические эксперименты в лаборатории</li>
+              <li>Интерактивные мастер-классы</li>
+              <li>Научные игры и квесты</li>
+              <li>Встречи с учеными и специалистами</li>
+            </ul>
+            <p>Для детей 7-15 лет в трех возрастных группах</p>
+          </div>
+          <div class="service-footer">
+            <a href="#summer-camp" class="btn">
+              <span class="btn-text">Подробнее</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Научные кружки -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Научные кружки</h3>
+          </div>
+          <div class="service-image" style="background-image: url('https://genomix.kz/wp-content/uploads/2023/06/program.png');"></div>
+          <div class="service-body">
+            <p>Регулярные занятия для школьников в течение учебного года, направленные на углубленное изучение биологии и биотехнологий:</p>
+            <ul>
+              <li>Еженедельные занятия в лаборатории</li>
+              <li>Работа с современным оборудованием</li>
+              <li>Разработка собственных исследовательских проектов</li>
+              <li>Подготовка к олимпиадам и конкурсам</li>
+            </ul>
+          </div>
+          <div class="service-footer">
+            <a href="#science-clubs" class="btn">
+              <span class="btn-text">Подробнее</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Олимпиады -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Олимпиады</h3>
+          </div>
+          <div class="service-image" style="background-image: url('https://genomix.kz/wp-content/uploads/2023/06/Why.png');"></div>
+          <div class="service-body">
+            <p>Подготовка к республиканским и международным олимпиадам по биологии для школьников:</p>
+            <ul>
+              <li>Специализированные курсы подготовки</li>
+              <li>Тренировочные тесты и задания</li>
+              <li>Практические занятия в лаборатории</li>
+              <li>Индивидуальные и групповые занятия</li>
+            </ul>
+          </div>
+          <div class="service-footer">
+            <a href="#olympiads" class="btn">
+              <span class="btn-text">Подробнее</span>
+            </a>
+          </div>
+        </div>
+  </section>
+  
+  <!-- Отзывы -->
+  <section class="section testimonials">
+    <div class="container">
+      <h2 class="section-title">Отзывы</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">С момента участия моего ребенка в лагере GenomiX, его интерес к науке значительно возрос. Он возвращается домой каждый день, полный восторга и рассказывает о новых вещах, которые узнал и сделал. Мы очень благодарны за эту прекрасную возможность!</p>
+          <p class="testimonial-author">Анонимный отзыв от родителя</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">Я очень рад, что пошел в GenomiX этим летом. Мне особенно понравилось изучать бактерии и делать свои микропрепараты. Я даже хочу стать ученым, когда вырасту!</p>
+          <p class="testimonial-author">Отзыв от участника лагеря</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">Мне очень понравилось в лагере GenomiX. Я узнал о многих удивительных вещах, и мне очень понравилось проводить эксперименты. Я хочу прийти снова в следующем году!</p>
+          <p class="testimonial-author">Отзыв от участника лагеря</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Регистрация -->
+  <section class="section registration" id="registration">
+    <div class="container">
+      <h2 class="section-title">Регистрация</h2>
+      <p style="text-align: center; margin-bottom: 40px;">Не упустите эту уникальную возможность для своего ребенка. Зарегистрируйтесь сегодня!</p>
+      <div class="form-container">
+        <form action="#" method="post">
+          <div class="form-group">
+            <label for="city" class="form-label">Ваш город</label>
+            <select name="city" id="city" class="form-select" required>
+              <option value="">Выберите город</option>
+              <option value="Астана">Астана - 3-14 июля (на базе Astana Garden School)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="age" class="form-label">Возраст ученика</label>
+            <select name="age" id="age" class="form-select" required>
+              <option value="">Выберите возраст</option>
+              <option value="7-8 лет">7-8 лет</option>
+              <option value="9-12 лет">9-12 лет</option>
+              <option value="13-15 лет">13-15 лет</option>
+              <option value="Другой">Другой</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="name" class="form-label">ФИО ученика</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="ФИО ученика" required>
+          </div>
+          <div class="form-group">
+            <label for="school" class="form-label">Школа, в которой обучается ученик</label>
+            <input type="text" name="school" id="school" class="form-control" placeholder="Школа, в которой обучается ученик" required>
+          </div>
+          <div class="form-group">
+            <label for="parent" class="form-label">ФИО родителя</label>
+            <input type="text" name="parent" id="parent" class="form-control" placeholder="ФИО родителя" required>
+          </div>
+          <div class="form-group">
+            <label for="kaspi_name" class="form-label">ФИО плательщика Kaspi</label>
+            <input type="text" name="kaspi_name" id="kaspi_name" class="form-control" placeholder="ФИО плательщика Kaspi" required>
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Номер телефона</label>
+            <input type="tel" name="phone" id="phone" class="form-control" placeholder="Номер телефона" required>
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn" style="width: 100%;">
+              <span class="btn-text">Подать заявку</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Контакты и футер -->
+  <footer class="footer" id="contacts">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <img src="https://genomix.kz/wp-content/uploads/2023/06/cropped-genomix-all-logos-53.png" alt="GenomiX Logo" class="footer-logo">
+          <p>Получите бесплатную консультацию по всем вопросам о наших программах и услугах.</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/genomix.kz" class="social-link" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/77064309815" class="social-link" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <h3>Контактная информация</h3>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <i class="fas fa-phone"></i>
+              <a href="tel:+77064309815">+7 (706) 430 9815</a>
+            </li>
+            <li class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:salem@genomix.kz">salem@genomix.kz</a>
+            </li>
+            <li class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>г. Астана, ул. Сарайшык 26/1</span>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Быстрые ссылки</h3>
+          <ul class="contact-list">
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#features">Преимущества</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#registration">Регистрация</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>2023 © ТОО GenomiX. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <!-- Простой скрипт для плавной прокрутки -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        
+        window.scrollTo({
+          top: target.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
