@@ -232,7 +232,7 @@
         <!-- Если по какой-то причине картинка выше не загрузится, можно использовать второй вариант -->
         <!-- <img src="https://i.ibb.co/zrdHcGZ/genomix-logo.png" alt="GenomiX Logo" class="logo"> -->
       </a>
-      <h1 class="page-title">Регистрация на летний научный лагерь</h1>
+      <h1 class="page-title">Регистрация на различные услуги Genomix!</h1>
     </div>
     
     <div class="service-info">
@@ -258,13 +258,25 @@
     <div class="form-container">
       <h2 class="form-title">Заполните форму для регистрации</h2>
       <form action="#" method="post">
+        <div class="form-group">
+            <label for="service_type" class="form-label">Выберите услугу</label>
+            <select name="service_type" id="service_type" class="form-select" required>
+              <option value="">Выберите услугу</option>
+              <option value="Летний научный лагерь">Летний научный лагерь</option>
+              <option value="Hybrid School">Hybrid School</option>
+              <option value="Hybrid School">Мастер-классы</option>
+              <option value="Hybrid School">Научные кружки</option>
+              <option value="Hybrid School">Олимпиады</option>
+
+            </select>
+          </div>
         <input type="hidden" name="service_type" value="Летний научный лагерь">
         
         <div class="form-group">
           <label for="city" class="form-label">Ваш город</label>
           <select name="city" id="city" class="form-select" required>
             <option value="">Выберите город</option>
-            <option value="Астана">Астана - 3-14 июля (на базе Astana Garden School)</option>
+            <option value="Астана">Астана</option>
           </select>
         </div>
         
